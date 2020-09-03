@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">LeaderBoard</string>
+    <string name="tab_text_1">Learning Leaders</string>
+    <string name="tab_text_2">Skill Iq Leaders</string>
+    <string name="submit">submit</string>
+    <string name="project_submission">Project Submission</string>
+    <string name="submission_not_successful">Submission not Successful</string>
+    <!-- TODO: Remove or change this placeholder text -->
+</resources>
