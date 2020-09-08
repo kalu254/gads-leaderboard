@@ -15,7 +15,6 @@ import androidx.fragment.app.DialogFragment;
 import com.kalu.leaderboard.FetchData.ServiceBuilder;
 import com.kalu.leaderboard.FetchData.SubmitApi;
 import com.kalu.leaderboard.R;
-import com.kalu.leaderboard.models.Submit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +26,7 @@ public class AssuranceFragment extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.assurance_fragment,container,false);
+        View view = inflater.inflate(R.layout.assurance_fragment, container, false);
 
         Bundle bundle = getArguments();
 
@@ -37,47 +36,43 @@ public class AssuranceFragment extends DialogFragment {
         String pLink = bundle.getString("plink");
 
         Button button = view.findViewById(R.id.btn_confirm_submission);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SubmitApi submitApi = ServiceBuilder.submitBuildService(SubmitApi.class);
-                Call<Submit> submitCall = submitApi.submitProject(fName,lName,eAddress,pLink);
-                submitCall.enqueue(new Callback<Submit>() {
+                Call<Void> submitCall = submitApi.submitProject(fName, lName, eAddress, pLink);
+                submitCall.enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<Submit> call, Response<Submit> response) {
+                    public void onResponse(Call<Void> call, Response<Void> response) {
                         if (!response.isSuccessful()){
-
+                            Log.d("bad response", response.message());
                             FailedDialog failedDialog = new FailedDialog();
-                            failedDialog.show(getParentFragmentManager(),"AssuranceFragment");
-                            Log.d("never", String.valueOf(response.code()));
-                            return;
+                            failedDialog.show(getParentFragmentManager(),"FailedDialog");
                         }
 
-                        Log.d("status okay", String.valueOf(response.code()));
+                        Log.d("workrd","yessss");
                         SuccessfulDialog successfulDialog = new SuccessfulDialog();
                         successfulDialog.show(getParentFragmentManager(),"SuccessfulDialog");
-
                     }
 
                     @Override
-                    public void onFailure(Call<Submit> call, Throwable t) {
-                        Log.d("nn",t.getMessage());
-
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Log.d("failed", t.getMessage());
                         FailedDialog failedDialog = new FailedDialog();
-                        failedDialog.show(getParentFragmentManager(),"AssuranceFragment");
-
+                        failedDialog.show(getParentFragmentManager(),"FailedDialog");
                     }
                 });
             }
         });
-
         ImageView cancel = view.findViewById(R.id.btn_cancel_assurance);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getDialog().dismiss();
-            }
-        });
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        getDialog().dismiss();
+                    }
+                });
         return view;
+
     }
 }
