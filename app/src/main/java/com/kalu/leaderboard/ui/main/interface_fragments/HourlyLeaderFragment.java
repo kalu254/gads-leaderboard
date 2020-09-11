@@ -1,10 +1,11 @@
-package com.kalu.leaderboard.ui.main;
+package com.kalu.leaderboard.ui.main.interface_fragments;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -18,6 +19,8 @@ import com.kalu.leaderboard.FetchData.LeadersApi;
 import com.kalu.leaderboard.FetchData.ServiceBuilder;
 import com.kalu.leaderboard.R;
 import com.kalu.leaderboard.models.HourlyLeader;
+import com.kalu.leaderboard.ui.main.view_models.HourlyViewModel;
+import com.kalu.leaderboard.ui.main.adapters.HourlyLeaderAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +36,7 @@ public class HourlyLeaderFragment extends Fragment {
 
     private List<HourlyLeader> mHourlyLeaders = new ArrayList<>();
     private HourlyViewModel mHourlyViewModel;
+    private ProgressBar spinner;
 
 
 
@@ -42,8 +46,6 @@ public class HourlyLeaderFragment extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_hourly_leader, container, false);
-
-
         return root;
     }
 
@@ -57,32 +59,35 @@ public class HourlyLeaderFragment extends Fragment {
 
         Call<List<HourlyLeader>> hourlyLeaders = leadersApi.getHourlyLeaders();
 
+        spinner = view.findViewById(R.id.progressBar);
+
+        spinner.setVisibility(View.VISIBLE);
+
+
         hourlyLeaders.enqueue(new Callback<List<HourlyLeader>>() {
             @Override
             public void onResponse(Call<List<HourlyLeader>> call, Response<List<HourlyLeader>> response) {
 
-                if (!response.isSuccessful()){
-                    Log.d("not successful", String.valueOf(response.code()));
-                    return;
+                if (response.isSuccessful()) {
+                    spinner.setVisibility(View.GONE);
+                    mHourlyLeaders = response.body();
+
+                    mHourlyViewModel.setList(mHourlyLeaders);
+
+                    RecyclerView recyclerView = view.findViewById(R.id.recycler_hours);
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                    recyclerView.setLayoutManager(linearLayoutManager);
+                    HourlyLeaderAdapter mHourlyLeaderAdapter = new HourlyLeaderAdapter(getContext());
+                    recyclerView.setAdapter(mHourlyLeaderAdapter);
+                    mHourlyViewModel.getListLiveData().observe(getViewLifecycleOwner(), new Observer<List<HourlyLeader>>() {
+                        @Override
+                        public void onChanged(List<HourlyLeader> hourlyLeaders) {
+
+                            mHourlyLeaderAdapter.setList(hourlyLeaders);
+                        }
+
+                    });
                 }
-
-                mHourlyLeaders = response.body();
-
-                mHourlyViewModel.setList(mHourlyLeaders);
-
-
-                RecyclerView recyclerView = view.findViewById(R.id.recycler_hours);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-                recyclerView.setLayoutManager(linearLayoutManager);
-                HourlyLeaderAdapter mHourlyLeaderAdapter = new HourlyLeaderAdapter(getContext());
-                recyclerView.setAdapter(mHourlyLeaderAdapter);
-                mHourlyViewModel.getListLiveData().observe(getViewLifecycleOwner(), new Observer<List<HourlyLeader>>() {
-                    @Override
-                    public void onChanged(List<HourlyLeader> hourlyLeaders) {
-
-                        mHourlyLeaderAdapter.setList(hourlyLeaders);
-                    }
-                });
             }
 
             @Override

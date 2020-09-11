@@ -1,4 +1,4 @@
-package com.kalu.leaderboard.ui.main;
+package com.kalu.leaderboard.ui.main.view_models;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;

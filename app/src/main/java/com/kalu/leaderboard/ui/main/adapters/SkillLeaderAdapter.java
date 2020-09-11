@@ -1,4 +1,4 @@
-package com.kalu.leaderboard.ui.main;
+package com.kalu.leaderboard.ui.main.adapters;
 
 import android.content.Context;
 import android.net.Uri;
@@ -57,7 +57,7 @@ public class SkillLeaderAdapter extends  RecyclerView.Adapter<SkillLeaderAdapter
         return mSkillIqLeaders.size();
     }
 
-     void setValuesToList(List<SkillIqLeader> skillIqLeaders) {
+     public void setValuesToList(List<SkillIqLeader> skillIqLeaders) {
         mSkillIqLeaders = skillIqLeaders;
         notifyDataSetChanged();
     }

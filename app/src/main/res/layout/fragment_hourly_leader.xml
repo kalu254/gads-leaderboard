@@ -5,7 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.HourlyLeaderFragment">
+    tools:context=".ui.main.interface_fragments.HourlyLeaderFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_hours"
@@ -15,5 +15,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/hourly_leader" />
+        tools:listitem="@layout/hourly_leader" >
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_hours"
+        app:layout_constraintStart_toStartOf="@+id/recycler_hours"
+        app:layout_constraintTop_toTopOf="@+id/recycler_hours" />
 </androidx.constraintlayout.widget.ConstraintLayout>

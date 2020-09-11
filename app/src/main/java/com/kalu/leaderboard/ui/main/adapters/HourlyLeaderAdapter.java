@@ -1,4 +1,4 @@
-package com.kalu.leaderboard.ui.main;
+package com.kalu.leaderboard.ui.main.adapters;
 
 import android.content.Context;
 import android.net.Uri;
@@ -55,7 +55,7 @@ public class HourlyLeaderAdapter extends RecyclerView.Adapter<HourlyLeaderAdapte
         return mHourlyLeaders.size();
     }
 
-     void setList(List<HourlyLeader> hourlyLeaders) {
+     public void setList(List<HourlyLeader> hourlyLeaders) {
         mHourlyLeaders = hourlyLeaders;
         notifyDataSetChanged();
     }

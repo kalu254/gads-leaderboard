@@ -1,4 +1,4 @@
-package com.kalu.leaderboard.ui.main;
+package com.kalu.leaderboard.ui.main.interface_fragments;
 
 import android.os.Bundle;
 import android.util.Log;

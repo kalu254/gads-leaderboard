@@ -1,4 +1,4 @@
-package com.kalu.leaderboard.ui.main;
+package com.kalu.leaderboard.ui.main.interface_fragments;
 
 import android.os.Bundle;
 
@@ -19,6 +19,8 @@ import com.kalu.leaderboard.FetchData.LeadersApi;
 import com.kalu.leaderboard.FetchData.ServiceBuilder;
 import com.kalu.leaderboard.R;
 import com.kalu.leaderboard.models.SkillIqLeader;
+import com.kalu.leaderboard.ui.main.view_models.SkillViewModel;
+import com.kalu.leaderboard.ui.main.adapters.SkillLeaderAdapter;
 
 import java.util.List;
 

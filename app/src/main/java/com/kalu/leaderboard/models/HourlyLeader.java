@@ -1,6 +1,5 @@
 package com.kalu.leaderboard.models;
 
-import javax.xml.transform.sax.SAXResult;
 
 public class HourlyLeader {
 

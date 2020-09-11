@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kalu.leaderboard.R;
+import com.kalu.leaderboard.ui.main.interface_fragments.AssuranceFragment;
 
 public class SubmitActivity extends AppCompatActivity {
 
@@ -33,8 +35,6 @@ public class SubmitActivity extends AppCompatActivity {
         lastName = findViewById(R.id.edt_txt_last_name);
         emailAddress = findViewById(R.id.edt_txt_email_address);
         projectLink = findViewById(R.id.edt_txt_project_url);
-
-
 
         mButton = findViewById(R.id.btn_submit_proj);
         mButton.setOnClickListener(new View.OnClickListener() {

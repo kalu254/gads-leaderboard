@@ -1,4 +1,4 @@
-package com.kalu.leaderboard.ui.main;
+package com.kalu.leaderboard.ui.main.adapters;
 
 import android.content.Context;
 
@@ -9,7 +9,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.kalu.leaderboard.R;
-import com.kalu.leaderboard.models.HourlyLeader;
+import com.kalu.leaderboard.ui.main.interface_fragments.HourlyLeaderFragment;
+import com.kalu.leaderboard.ui.main.interface_fragments.SkillIqLeaderFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
